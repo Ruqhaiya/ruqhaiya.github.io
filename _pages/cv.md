@@ -11,27 +11,27 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+* M.S., Data Science	| Seattle University (_Sep 2024 - May 2025_)	 			        		
+* B.E., Information Technology | Muffakham Jah college of Engineering and Technology (_2017 - 2021_)
+
 
 Work experience
 ======
-* Spring 2024: Academic Pages Collaborator
-  * Github University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+**Graduate Research Assistant @ Seattle University (_June 2024 - Present_)**
+* Working on neuroscience research project on barn owls, where I analyze neurophysiological data that contains neural responses to different auditory stimuli, with the goal of understanding how these owls localize sound with such precision.
+* Extracting data from published figures, re-creating them, organizing the data from neurobiological experiments to ensure seamless data analysis.
+* Applying various regression techniques to fit the data and plot a correlation between different responses of over 120 different neurons.
+* Presenting a poster at the Neuroscience Conference 2024 to showcase the latest findings of our analysis. 
 
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
-  
+**Software/Data Engineer @ Applied Information Sciences (_Aug 2021 – Aug 2023_)**
+* Worked on building an end-to-end Data Transformation ELT Solution that handled **millions of records** of a leading auto insurance company in the USA.
+* Built an Audit Framework to validate the data processed by the ELT solution.
+* Developed a separate Test framework of around **(~60 unit tests)** to perform Unit Testing on the complete ELT solution.
+* Built a PDF Q&A chat application using OpenAI API, Large Language Models & Semantic Kernels SDK.
+* Integrated vector database Qdrant with LLMs to store vectorized data and fetch most relevant responses to the query.
+* Worked on Prompt Engineering best practices and utilized them to enhance the query efficiency.
+
 Skills
 ======
 * Skill 1
