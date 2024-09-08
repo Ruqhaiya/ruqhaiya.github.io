@@ -5,7 +5,7 @@ title_separator          : "-"
 name                     : &name "Ruqhaiya"
 description              : &description "Portfolio Website"
 url                      : https://ruqhaiya.github.io
-baseurl                  : "/portfolio" # the subpath of your site, e.g. "/blog"
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "Ruqhaiya/ruqhaiya.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
