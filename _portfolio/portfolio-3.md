@@ -50,7 +50,7 @@ Ensure you have the following prerequisites installed on your system:
 2. Navigate to the cloned directory and install the required dependencies by running pip install -r requirements.txt in your terminal.
 3. Start the application by running python bbms.py.
 
-## How to Use
+## How To Use
 Upon launching BBMS, you will be greeted with a login prompt to connect to your MySQL database. After a successful login, the main interface allows you to:
 
 > Select and execute predefined SQL queries from the menu.
