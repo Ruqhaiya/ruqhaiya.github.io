@@ -16,6 +16,11 @@ The Blood Bank Management System (BBMS) is an application designed to facilitate
 - [Overview](#overview)
 - [Features](#features)
 - [Visualization](#visualization)
+- [Getting Started](#getting-started)
+   - [Prerequisite](#prerequisite)
+   - [Installation](#installation)
+-[How To Use](how-to-use)
+-[Versioning](versioning)
 
 ## Overview
 The Blood Bank Management System (BBMS) is an application designed to facilitate the querying and visualization of blood bank data. It provides a user-friendly interface to execute predefined SQL queries, access donor information, manage blood inventory, and visualize data analytics through integrated Tableau visualizations.
@@ -57,4 +62,4 @@ Upon launching BBMS, you will be greeted with a login prompt to connect to your 
 ![image](https://github.com/user-attachments/assets/59985280-1287-44fe-9b9a-28eb6ef92174)
 
 ## Versioning
-For the versions available, see the tags on this repository.
+For the versions available, see the [tags on this repository.](https://github.com/%3Cyour-username%3E/bbms/tags)
