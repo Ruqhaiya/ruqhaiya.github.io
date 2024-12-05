@@ -11,4 +11,18 @@ The Blood Bank Management System (BBMS) is an application designed to facilitate
 ## Code Repository
 [Explore the code on GitHub](https://github.com/Ruqhaiya/Blood-Bank-Management-System)
 
+### Table of Contents
+
+- [Introduction](#introduction)
+- [Data Analysis](#data-analysis)
+- [Conclusion](#conclusion)
+
+## Introduction
+This is the introduction section where you describe the project. It can be a summary of your work.
+
+## Data Analysis
+This is the data analysis section where you go into the details of the data processing and results.
+
+## Conclusion
+This section contains the conclusion of the project, summarizing the key findings.
 
