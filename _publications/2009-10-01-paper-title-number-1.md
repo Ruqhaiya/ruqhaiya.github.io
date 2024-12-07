@@ -1,7 +1,7 @@
 ---
-title: "Paper Title Number 1"
-collection: publications
-category: manuscripts
+title: "A Population Model of the Lateral Shell of the Central Nucleus of the Inferior Colliculus in Barn Owls"
+collection: Yet to be published (Apr 2025)
+category: Neuroscience
 permalink: /publication/2009-10-01-paper-title-number-1
 excerpt: 'This paper is about the number 1. The number 2 is left for future work.'
 date: 2009-10-01
