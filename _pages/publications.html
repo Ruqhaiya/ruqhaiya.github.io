@@ -33,7 +33,9 @@ author_profile: true
 {% endif %}
 
  -->
----
+
+
+ ---
 layout: archive
 title: "Publications"
 permalink: /publications/
@@ -46,10 +48,26 @@ author_profile: true
 
 {% include base_path %}
 
-<!-- Display only featured publications -->
-{% for post in site.publications %}
-  {% if post.featured == true %}
+<!-- New style rendering if publication categories are defined -->
+{% if site.publication_category %}
+  {% for category in site.publication_category  %}
+    {% assign title_shown = false %}
+    {% for post in site.publications reversed %}
+      {% if post.category != category[0] or post.featured != true %}
+        {% continue %}
+      {% endif %}
+      {% unless title_shown %}
+        <h2>{{ category[1].title }}</h2><hr />
+        {% assign title_shown = true %}
+      {% endunless %}
+      {% include archive-single.html %}
+    {% endfor %}
+  {% endfor %}
+{% else %}
+  {% for post in site.publications reversed %}
+    {% if post.featured != true %}
+      {% continue %}
+    {% endif %}
     {% include archive-single.html %}
-  {% endif %}
-{% endfor %}
-
+  {% endfor %}
+{% endif %}
