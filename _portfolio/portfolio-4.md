@@ -58,7 +58,6 @@ The project focuses on developing a management system to facilitate the handling
   - Python (Version 3.x).
   - Required libraries specified in the `requirements.txt` file.
 
----
 
 ### Installation
 1. Clone the repository:
@@ -78,7 +77,6 @@ The project focuses on developing a management system to facilitate the handling
    python app.py
    ```
 
----
 
 ### How To Use
 1. Launch the application.
@@ -88,7 +86,6 @@ The project focuses on developing a management system to facilitate the handling
    - **Data Visualization:** Analyze data through graphical outputs.
    - **Admin Controls:** Modify or manage system settings.
 
----
 
 ### Versioning
 - **Current Version:** 1.0.0
