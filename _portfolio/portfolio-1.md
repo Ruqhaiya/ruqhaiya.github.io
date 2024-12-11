@@ -126,20 +126,28 @@ The project aims to develop a predictive model to accurately forecast the **hour
 ### Diagrams (Descriptions Included)
 
 #### Figure 2: Hourly Load in New Hampshire in Time Series
+![image](https://github.com/user-attachments/assets/21b694a9-cb9b-420e-a4cb-d3a4562e7e3f)
+
 A time series plot showing hourly electricity load trends for New Hampshire over three years. Clear seasonal patterns are visible, with peaks during summer and winter months.
 
 #### Figure 15: Boxplot of Monthly Load
+![image](https://github.com/user-attachments/assets/6c09dbc5-880d-4055-b6cc-13aa0ba52182)
+
 A boxplot showcasing monthly variations in electricity load. Peaks correspond to summer (air conditioning demand) and winter (heating demand).
 
 #### Figure 21: Residual Plot for Linear Regression
+![image](https://github.com/user-attachments/assets/9549952e-2cd0-4ad7-a31c-2ca894bc3fe9)
+
 Displays the residuals (differences between actual and predicted values) for a linear regression model with 16 features. Points are symmetrically distributed around zero.
 
 #### Figure 22: Residual Plot for Random Forest
+![image](https://github.com/user-attachments/assets/6a6d81b8-20b3-47bf-b4ba-3a59ca180588)
+
 Highlights the Random Forest model’s residuals, showing improved performance compared to linear regression.
 
 
 
-Would you like the actual diagrams extracted or any additional details added? 😊
+
 
 
  
