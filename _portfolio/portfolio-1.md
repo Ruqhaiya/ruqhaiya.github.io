@@ -2,7 +2,9 @@
 title: "Predicting-Electricity-Load-in-New-Hampshire"
 collection: portfolio
 ---
+
 The primary objective of this project is to develop a predictive model that accurately forecasts the hourly electricity load for the New Hampshire zone. This forecast will cover the upcoming month, providing crucial insight into the fund's trading activities. To achieve this, we will analyze historical electricity load data from 2020 to 2022, focusing exclusively on New Hampshire.
+
  
 ## Code Repository
 
