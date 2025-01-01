@@ -4,8 +4,6 @@ description: "In this report, neural networks are employed to identify the bird 
 collection: portfolio
 ---
 
-![Alt text](/images/1.png)
-
 - [Github Code Repository](https://github.com/Ruqhaiya/Bird-call-Identification-using-Neural-Networks)
 
 ## Abstract
@@ -26,11 +24,13 @@ Consider the neural network illustrated in Figure 1 as an example. It consists o
 
 The input layer receives raw data. The output layer is responsible for making the final predictions. The intermediate levels are known as hidden layers, and they perform intermediary calculations. A neural network adjusts the weights between neurons during training to increase its prediction accuracy. The network is fed a set of labeled training data, and an optimization method is used to update the weights such that the network's predictions are as close to the true labels as possible.
 
+<div align="center">
+
 ![Alt text](/images/1.png)
 
 Figure 1 Neural Network with 3 layers- Architecture
 
-
+</div>
 
 For instance, the Rectified Linear Unit, or ReLU, a popular activation function used in neural networks. It works like this:
 
@@ -149,11 +149,11 @@ Below are plots of CNN based binary classification models with various parameter
 
 <div align="center">
   
-![image](https://github.com/user-attachments/assets/ef8270a9-2553-471b-ab67-4a71704e2ff0) ![image](https://github.com/user-attachments/assets/e9d1a3a7-e3a7-4a34-9576-17da0136ad58)
+![Alt text](/images/3.png) ![Alt text](/images/3.png)
 
 **Figure left**: Binary classification CNN model performance without dropout regularization **Right**: CNN model performance with dropout regularization
 
-![image](https://github.com/user-attachments/assets/379e71ad-e853-4c65-ba6d-c6da988e6877) ![image](https://github.com/user-attachments/assets/0ea9f8b7-79b1-4015-8c9e-62261f1a6ca0)
+![Alt text](/images/2.png) ![Alt text](/images/7.png)
 
 **Figure left**: Binary classification CNN model with 0.3 dropout regularization **Right**: CNN with batch regularization and early stopping
 
@@ -192,15 +192,15 @@ CNN with 3 hidden layers and no dropout gave a validation accuracy of 67.24% and
 
 <div align="center">
   
-![image](https://github.com/user-attachments/assets/f37123ff-677c-4119-8778-08487b3f0821)
+![Alt text](/images/4.png)
 
 Confusion matrix with dropout regularization
 
-![image](https://github.com/user-attachments/assets/41001a92-c38e-4514-be71-562dd65cc749)
+![Alt text](/images/5.png)
 
 Confusion matrix with class weights and 10 epochs
 
-![image](https://github.com/user-attachments/assets/7268e4c7-a3fd-4693-8de2-58382df3fff5)
+![Alt text](/images/6.png)
 
 Confusion matrix with class weights and 20 epochs
 
@@ -210,7 +210,7 @@ As it is evident, there’s improvement in predictions when we used class weight
 
 <div align="center">
 
-![image](https://github.com/user-attachments/assets/071a5bd0-26c6-4111-a1cc-330f5be4c2d3)
+![Alt text](/images/8.png)
 
 </div>
 
