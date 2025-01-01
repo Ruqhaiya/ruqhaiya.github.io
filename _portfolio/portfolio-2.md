@@ -26,7 +26,7 @@ The input layer receives raw data. The output layer is responsible for making th
 <div align="center">
 
 
-![image](/images_p1/1.png)
+![img1](/images_p1/1.png)
 
 Figure 1 Neural Network with 3 layers- Architecture
 
@@ -149,13 +149,13 @@ Below are plots of CNN based binary classification models with various parameter
 
 <div align="center">
   
-![image](/images_p1/3.png) ![image](/images_p1/3.png)
+![img3](/images_p1/3.png) ![image](/images_p1/3.png)
 
 **Figure left**: Binary classification CNN model performance without dropout regularization **Right**: CNN model performance with dropout regularization
 
 
 
-![image](/images_p1/2.png) ![image](/images_p1/7.png)
+![img2](/images_p1/2.png) ![image](/images_p1/7.png)
 
 **Figure left**: Binary classification CNN model with 0.3 dropout regularization **Right**: CNN with batch regularization and early stopping
 
@@ -194,15 +194,15 @@ CNN with 3 hidden layers and no dropout gave a validation accuracy of 67.24% and
 
 <div align="center">
   
-![image](/images_p1/4.png)
+![img4](/images_p1/4.png)
 
 Confusion matrix with dropout regularization
 
-![image](/images_p1/5.png)
+![img5](/images_p1/5.png)
 
 Confusion matrix with class weights and 10 epochs
 
-![image](/images_p1/6.png)
+![img6](/images_p1/6.png)
 
 Confusion matrix with class weights and 20 epochs
 
@@ -212,7 +212,7 @@ As it is evident, there’s improvement in predictions when we used class weight
 
 <div align="center">
 
-![image](/images_p1/8.png)
+![img8](/images_p1/8.png)
 
 </div>
 
