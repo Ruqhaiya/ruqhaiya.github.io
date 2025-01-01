@@ -25,7 +25,7 @@ The input layer receives raw data. The output layer is responsible for making th
 
 <div align="center">
 
-![image](_portfolio\images_p1\1.png)
+![image](images_p1\1.png)
 
 Figure 1 Neural Network with 3 layers- Architecture
 
