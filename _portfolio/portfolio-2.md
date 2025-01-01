@@ -24,13 +24,11 @@ Consider the neural network illustrated in Figure 1 as an example. It consists o
 
 The input layer receives raw data. The output layer is responsible for making the final predictions. The intermediate levels are known as hidden layers, and they perform intermediary calculations. A neural network adjusts the weights between neurons during training to increase its prediction accuracy. The network is fed a set of labeled training data, and an optimization method is used to update the weights such that the network's predictions are as close to the true labels as possible.
 
-<div align="center">
 
 ![Alt text](/images/1.png)
 
 Figure 1 Neural Network with 3 layers- Architecture
 
-</div>
 
 For instance, the Rectified Linear Unit, or ReLU, a popular activation function used in neural networks. It works like this:
 
@@ -95,9 +93,6 @@ To train the model, an optimization algorithm called Adam was employed. It adjus
 
 For external testing, we preprocessed three MP3 files using the same methodology that was used for the input data. This allowed for uniformity in input data that the model was trained on. A total of 183 spectrograms were obtained from the test MP3 files. Each file was separately fed to the multi-class CNN classification model to make predictions. The spectrograms were also padded to have the same frequency and time dimensions as the training data. 
 
-
-<div align="center">
-
 ## Computational Results
 
 | Activation Function (Hidden layers) | Hidden Layers | Dropout Regularization (0.5) | Epochs | Validation Accuracy (%) | CV Error Rate (%) |
@@ -133,8 +128,6 @@ For external testing, we preprocessed three MP3 files using the same methodology
 
 Figure binary class classification results
 
-</div>
-
 **Sigmoid Activation Function**: Models with 1 or 2 hidden layers and no dropout regularization achieved high validation accuracy of upto 94.24% and low CV error rates, suggesting they performed well. Introducing dropout regularization further improved generalization, slightly reducing the CV error rate. However, increasing to 3 hidden layers without dropout led to overfitting, as evidenced by a sharp drop in validation accuracy 47.62% and a high CV error rate.
 
 **ReLU Activation Function**: Models with 1 or 2 hidden layers, both with and without dropout, performed excellently with validation accuracies around 95.24% and low CV error rates. The model with 3 hidden layers and no dropout achieved perfect validation accuracy (100%), which is a clear sign of overfitting despite the low CV error rate.
@@ -146,8 +139,6 @@ Figure binary class classification results
 **Convolutional Neural Networks (CNNs)**: The CNN model with ReLU activation, 3 hidden layers, and dropout (0.5) performed well, achieving 95.24% validation accuracy and a very low CV error rate, that shows good generalization of the model classifications. CNN with batch normalization and early stopping showed moderate performance with a validation accuracy of 61.90% and a high CV error rate, indicating possible underfitting. 
 
 Below are plots of CNN based binary classification models with various parameters and regularization techniques. The model without dropout regularization tends to overfit, as we can observe the fluctuating validation accuracy and validation loss. Introducing dropout regularization helped the model generalize well as shown by more stable validation accuracy and loss . The dropout rate to 0.3 provides some benefits, but overfitting still occurs. Combining batch normalization and early stopping results in the best performance, with consistent improvements in both training and validation metrics, that shows good generalization of the model. 
-
-<div align="center">
   
 ![Alt text](/images/3.png) ![Alt text](/images/3.png)
 
@@ -178,8 +169,6 @@ Below are plots of CNN based binary classification models with various parameter
 
 Figure Multi-class classification models performance metrics
 
-</div>
-
 **Sigmoid Activation Function**: With 1 hidden layer and dropout regularization, the model achieved a validation accuracy of 67.24%. Adding more hidden layers (2 and 3) resulted in a decrease in validation accuracy. with increasing CV error rates, indicating overfitting or inadequate learning.
 
 **ReLU Activation Function**: The model with 1 hidden layer and dropout regularization achieved a validation accuracy of 62.93%, when the number of hidden layers was increased, there’s a significant drop in performance, with the model's accuracy falling to ~ 12.93% and high CV error rates, indicating overfitting.
@@ -189,8 +178,6 @@ Tanh Activation Function: The model with 1 hidden layer and dropout regularizati
 
 CNN with 3 hidden layers and no dropout gave a validation accuracy of 67.24% and a CV error rate of 2.0% only.  CNN with Class Weights, 4 hidden layers and dropout achieved a validation accuracy of 68.97% and a CV error rate of 1.1%. Another configuration with class weights achieved a validation accuracy of 69.83% and a CV error rate of 1.01%. Extending the training to 20 epochs improved the performance further, with a validation accuracy of 72.41% and a CV error rate of 1.06%. 
 
-
-<div align="center">
   
 ![Alt text](/images/4.png)
 
@@ -204,19 +191,15 @@ Confusion matrix with class weights and 10 epochs
 
 Confusion matrix with class weights and 20 epochs
 
-</div>
 
 As it is evident, there’s improvement in predictions when we used class weights, this was done because there was class imbalance in the dataset and it led to probabilities of solid 1s and 0s. The models also exhibit overfitting signs due to the imbalance in data. We tried many models and the most efficient were CNNs, although the highest accuracy was 72% for the multi-class classification model.
 
-<div align="center">
 
 ![Alt text](/images/8.png)
 
-</div>
 
 For external testing, when noise reduction was not used, the model struggled to predict the species and we saw 0s and 1s in probabilities. We have used 3 loud segments from the mp3 files and these are called segments. S1,S2,S3 are segments 1,2 and 3. With noise reduction, the model showed great performance. The probabilities can be seen in the table below. 
 
-<div align="center">
   
 | Species Name             | Audio File 1 (S1) | Audio File 1 (S2) | Audio File 1 (S3) | Audio File 2 (S1) | Audio File 2 (S2) | Audio File 2 (S3) | Audio File 3 (S1) | Audio File 3 (S2) | Audio File 3 (S3) |
 |--------------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
@@ -235,12 +218,10 @@ For external testing, when noise reduction was not used, the model struggled to 
 
 Figure results of external testing - probabilities
 
-</div>
 
 The results show that audio files might have more than one species’s vocalization. Which is why we have ranked them based on their descending probabilities below. 
 
 
-<div align="center">
  
 | Audio File         | Dominant Species                            |
 |---------------------|---------------------------------------------|
@@ -256,7 +237,6 @@ The results show that audio files might have more than one species’s vocalizat
 
 Figure Dominant species based on aggregated probabilities for each audio file
 
-</div>
 
 ## Discussion
 Overall, we explored various neural network architectures with varying functions and parameters. We saw models overfitting and underfitting under different parameters. CNNs have shown a stable performance across both classification problems. We have explored techniques like Batch Normalization and dropout regularization to make the learning process more efficient and reliable. When we notice class imbalance in the dataset, we use class weights to help the model generalize well. This showed significant difference in the model’s performance and that’s evident through the three confusion matrices shown in the computational results. As shown in the results table, especially for binary classification, we can see signs of overfitting where the model wasn’t learning well and achieving high test accuracy even though the training accuracy was low. 
