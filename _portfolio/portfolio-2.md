@@ -24,13 +24,11 @@ Consider the neural network illustrated in Figure 1 as an example. It consists o
 
 The input layer receives raw data. The output layer is responsible for making the final predictions. The intermediate levels are known as hidden layers, and they perform intermediary calculations. A neural network adjusts the weights between neurons during training to increase its prediction accuracy. The network is fed a set of labeled training data, and an optimization method is used to update the weights such that the network's predictions are as close to the true labels as possible.
 
-<div align="center">
 
-![image](https://github.com/user-attachments/assets/19ed7df1-c4d0-4164-b7a3-6329fd184c85)
+![image](1.png)
 
 Figure 1 Neural Network with 3 layers- Architecture
 
-</div>
 
 
 For instance, the Rectified Linear Unit, or ReLU, a popular activation function used in neural networks. It works like this:
