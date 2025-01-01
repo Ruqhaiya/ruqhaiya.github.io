@@ -1,3 +1,8 @@
+---
+title: "Exploring The Sound of Seattle Birds with Neural Networks"
+collection: portfolio
+---
+
 # Exploring The Sound of Seattle Birds with Neural Networks
 
 ## Abstract

@@ -1,3 +1,8 @@
+---
+title: "Blood Bank Management System (BBMS)"
+collection: portfolio
+---
+
 # Blood Bank Management System (BBMS)
 # Table of Contents
 - [Blood Bank Management System (BBMS)](#blood-bank-management-system-bbms)
