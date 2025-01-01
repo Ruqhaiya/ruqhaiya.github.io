@@ -24,8 +24,7 @@ Consider the neural network illustrated in Figure 1 as an example. It consists o
 
 The input layer receives raw data. The output layer is responsible for making the final predictions. The intermediate levels are known as hidden layers, and they perform intermediary calculations. A neural network adjusts the weights between neurons during training to increase its prediction accuracy. The network is fed a set of labeled training data, and an optimization method is used to update the weights such that the network's predictions are as close to the true labels as possible.
 
-
-![image](../images/1.png)
+![Alt text](../images/1.png)
 
 Figure 1 Neural Network with 3 layers- Architecture
 
