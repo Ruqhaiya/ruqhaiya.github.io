@@ -32,11 +32,9 @@ Figure 1 Neural Network with 3 layers- Architecture
 
 For instance, the Rectified Linear Unit, or ReLU, a popular activation function used in neural networks. It works like this:
 
-<div align="center">
   
 f(x) = max(0, x); where x is the input.
 
-</div>
 
 Essentially, ReLU outputs the input value if it's positive and outputs 0 if it's negative. This simplicity makes ReLU both computationally efficient, easy to understand and implement. However, it has a potential downside: sometimes, a neuron might always output 0, becoming what we call a 'dead neuron'.[4] This can happen if the weights are set in such a way that the neuron always receives negative values. To address this, we can use a variation called Leaky ReLU, which allows a small negative slope, keeping the neuron active even with negative inputs.
 
@@ -54,7 +52,6 @@ A pooling layer helps reduce the size of a large image, condensing it into a sma
 
 For example, max pooling looks at each 2 × 2 block and picks the highest value to represent the entire block. This then reduces the size of the image by a factor of two in each direction, significantly lowering the computational load. Additionally, it also  provides location invariance: as long as there is one large value within a block, the whole block is represented by that value in the reduced image. The example below explains max pooling in a simpler way. 
 
-<div align="center">
   
 **Input matrix:**
 
@@ -72,7 +69,6 @@ For example, max pooling looks at each 2 × 2 block and picks the highest value 
 
 [ 2 4 ]
 
-</div>
 
 CNNs have a great ability to learn features automatically, eliminating the need for manual feature extraction. This makes them highly adaptable to a wide range of tasks, from simple image recognition to more complex tasks like object detection and segmentation. Additionally, CNNs can be trained on large datasets, enabling them to learn highly accurate representations of complex visual patterns. 
 
