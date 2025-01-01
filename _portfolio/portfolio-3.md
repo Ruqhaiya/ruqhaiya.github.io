@@ -62,16 +62,15 @@ Upon launching BBMS, you will be greeted with a login prompt to connect to your 
 - Select and execute predefined SQL queries from the menu.
 - Access and interact with embedded Tableau visualizations for enhanced data analysis.
 
-![image](https://github.com/Ruqhaiya/Blood-Bank-Management-System/assets/55420948/b7a4f819-111c-404f-a0a3-d87d30120a4c)
+![image](https://github.com/user-attachments/assets/b097614c-14b2-45cd-9554-88ef5dbec2c5)
 
-![image](https://github.com/Ruqhaiya/Blood-Bank-Management-System/assets/55420948/1c6b96c3-72af-4176-9166-3d4ce8caae24)
+![image](https://github.com/user-attachments/assets/0f4432f6-1cd1-411e-b9c0-7a0261f5b566)
 
-![image](https://github.com/Ruqhaiya/Blood-Bank-Management-System/assets/55420948/a108fd98-ab95-460e-b86e-7c7319adafd3)
+![image](https://github.com/user-attachments/assets/2d5a82cc-3c77-4698-acc2-3f77eeaddad6)
 
-![image](https://github.com/Ruqhaiya/Blood-Bank-Management-System/assets/55420948/ce1c2ae0-65cc-442d-9ab5-4d3ce290e6d0)
+![image](https://github.com/user-attachments/assets/220d2969-14ea-421a-9abe-7251589dbb76)
 
-![image](https://github.com/Ruqhaiya/Blood-Bank-Management-System/assets/55420948/2a11fe63-62d6-478d-9475-17df0c0c55fb)
-
+![image](https://github.com/user-attachments/assets/59985280-1287-44fe-9b9a-28eb6ef92174)
 
 ## Versioning 
 [Back to top](#table-of-contents)
