@@ -26,7 +26,7 @@ The input layer receives raw data. The output layer is responsible for making th
 
 <div align="center">
 
-![img1](/images/1.png)
+![image](https://github.com/user-attachments/assets/12e47244-c71f-44b9-866c-9c5fc627c9cc)
 
 Figure 1 Neural Network with 3 layers- Architecture
 
@@ -150,13 +150,11 @@ Below are plots of CNN based binary classification models with various parameter
 
 <div align="center">
   
-![img3](/images/3.png) ![image](/images/3.png)
+![image](https://github.com/user-attachments/assets/ef8270a9-2553-471b-ab67-4a71704e2ff0) ![image](https://github.com/user-attachments/assets/e9d1a3a7-e3a7-4a34-9576-17da0136ad58)
 
 **Figure left**: Binary classification CNN model performance without dropout regularization **Right**: CNN model performance with dropout regularization
 
-
-
-![img2](/images/2.png) ![image](/images/7.png)
+![image](https://github.com/user-attachments/assets/379e71ad-e853-4c65-ba6d-c6da988e6877) ![image](https://github.com/user-attachments/assets/0ea9f8b7-79b1-4015-8c9e-62261f1a6ca0)
 
 **Figure left**: Binary classification CNN model with 0.3 dropout regularization **Right**: CNN with batch regularization and early stopping
 
@@ -195,15 +193,15 @@ CNN with 3 hidden layers and no dropout gave a validation accuracy of 67.24% and
 
 <div align="center">
   
-![img4](/images/4.png)
+![image](https://github.com/user-attachments/assets/f37123ff-677c-4119-8778-08487b3f0821)
 
 Confusion matrix with dropout regularization
 
-![img5](/images/5.png)
+![image](https://github.com/user-attachments/assets/41001a92-c38e-4514-be71-562dd65cc749)
 
 Confusion matrix with class weights and 10 epochs
 
-![img6](/images/6.png)
+![image](https://github.com/user-attachments/assets/7268e4c7-a3fd-4693-8de2-58382df3fff5)
 
 Confusion matrix with class weights and 20 epochs
 
@@ -213,7 +211,7 @@ As it is evident, there’s improvement in predictions when we used class weight
 
 <div align="center">
 
-![img8](/images/8.png)
+![image](https://github.com/user-attachments/assets/071a5bd0-26c6-4111-a1cc-330f5be4c2d3)
 
 </div>
 
