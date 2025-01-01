@@ -149,15 +149,15 @@ Below are plots of CNN based binary classification models with various parameter
 
 <div align="center">
   
-![image](https://github.com/user-attachments/assets/abf080af-60ee-410a-87c0-240878d2cd02) ![image](https://github.com/user-attachments/assets/733b2c96-bb8d-4ff0-bd78-7b47b852060f)
+![image](/images_p1/3.png) ![image](/images_p1/3.png)
 
 **Figure left**: Binary classification CNN model performance without dropout regularization **Right**: CNN model performance with dropout regularization
 
 
 
-![image](https://github.com/user-attachments/assets/9a8ace95-d9d3-4167-b4ff-eb68ebba66c9) ![image](https://github.com/user-attachments/assets/82f47f30-34f3-464b-8b44-7b1ded558982)
-Figure left: Binary classification CNN model with 0.3 dropout regularization
-Right: CNN with batch regularization and early stopping
+![image](/images_p1/2.png) ![image](/images_p1/7.png)
+
+**Figure left**: Binary classification CNN model with 0.3 dropout regularization **Right**: CNN with batch regularization and early stopping
 
 | Activation Function (Hidden layers) | Hidden Layers | Dropout Regularization (0.5) | Epochs | Validation Accuracy (%) | CV Error Rate (%) |
 |-------------------------------------|---------------|-------------------------------|--------|--------------------------|-------------------|
@@ -194,15 +194,15 @@ CNN with 3 hidden layers and no dropout gave a validation accuracy of 67.24% and
 
 <div align="center">
   
-![image](https://github.com/user-attachments/assets/52216ae6-f0d1-428e-8e53-a72d264c08e0)
+![image](/images_p1/4.png)
 
 Confusion matrix with dropout regularization
 
-![image](https://github.com/user-attachments/assets/b66fc065-0f4e-47b1-9cc1-aefbbbc28ac6)
+![image](/images_p1/5.png)
 
 Confusion matrix with class weights and 10 epochs
 
-![image](https://github.com/user-attachments/assets/b2088d89-4eb5-41dd-877e-a1eca1ed18ed)
+![image](/images_p1/6.png)
 
 Confusion matrix with class weights and 20 epochs
 
@@ -212,7 +212,7 @@ As it is evident, there’s improvement in predictions when we used class weight
 
 <div align="center">
 
-![image](https://github.com/user-attachments/assets/b5d54b89-d766-4d06-b48e-85ea31a133f9)
+![image](/images_p1/8.png)
 
 </div>
 
