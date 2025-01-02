@@ -4,20 +4,18 @@ excerpt: "The aim of this study is to predict whether a dwelling is occupied by 
 collection: portfolio
 ---
 
-# Analyzing and Predicting Dwelling Occupancy in Washington State
+- [Github Code Repository](https://github.com/Ruqhaiya/Blood-Bank-Management-System)
 
 ## Table of Contents
-- [Analyzing and Predicting Dwelling Occupancy in Washington State](#analyzing-and-predicting-dwelling-occupancy-in-washington-state)
-  - [Table of Contents](#table-of-contents)
-  - [Abstract](#abstract)
-  - [Introduction](#introduction)
-  - [Theoretical Background](#theoretical-background)
-  - [Methodology](#methodology)
-  - [Computational Results](#computational-results)
-  - [Discussion](#discussion)
-  - [Conclusion](#conclusion)
-  - [References](#references)
-
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [Introduction](#introduction)
+- [Theoretical Background](#theoretical-background)
+- [Methodology](#methodology)
+- [Computational Results](#computational-results)
+- [Discussion](#discussion)
+- [Conclusion](#conclusion)
+- [References](#references)
 --- 
 
 ## Abstract

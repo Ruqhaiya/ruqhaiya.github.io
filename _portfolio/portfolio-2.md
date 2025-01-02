@@ -6,15 +6,36 @@ collection: portfolio
 
 - [Github Code Repository](https://github.com/Ruqhaiya/Bird-call-Identification-using-Neural-Networks)
 
+## Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Abstract](#abstract)
+- [Introduction](#introduction)
+- [Theoretical Background](#theoretical-background)
+- [Methodology](#methodology)
+- [Computational Results](#computational-results)
+- [Discussion](#discussion)
+- [Conclusion](#conclusion)
+- [References](#references)
+--- 
+
 ## Abstract
 In this report, neural networks are employed to identify the bird species of Seattle. We used spectrograms that were derived from Xeno-Canto’s Birdcall competition dataset that consists of 10 high-quality MP3 sound clips for each of the 12 selected bird species[1]. Additionally, three MP3 bird call recordings were available for external testing. The primary goal is to classify bird species based on their distinct vocalizations. We developed two custom neural network models: a binary classification model distinguishing between the American Crow and the Blue Jay, and a multi-class classification model capable of identifying any of the 12 bird species. Predictions on the three external test clips are made to assess the effectiveness of the models. Neural Networks with different architectures and parameters were employed to find the most efficient model.. For hidden layers, various activation functions such as Relu, SoftMax, or Leaky Relu were used. The report concludes with a discussion on alternative modeling approaches and the suitability of neural networks for this specific application.
 
+[Back to top](#table-of-contents)
+
+---
+
 ## Introduction
+
 In this study, a neural network is employed to categorize bird species using pre-processed spectrograms of their sounds. The dataset, originating from Xeno-Canto’s Birdcall competition,  comprises original sound clips recorded in the Seattle area. Each clip has been preprocessed into spectrograms, which act as visual representations of the bird sounds and serve as the primary input to the neural networks. These spectrograms are organized in HDF5 format. 
 
 The main objective is to develop a robust neural network which can accurately predict species based on their unique sound patterns. We have performed binary as well as multi-class classification tasks on the dataset. We developed various neural network models for the binary classification task to distinguish between the American Crow and the Blue Jay. We used a convolutional neural network for the multi-class classification task that is capable of identifying any of the 12 bird species namely American crow, Barn swallow, Black-capped chickadee, Blue jay, Dark-eyed junco, House-finch, Mallard, Northern flicker, Red-winged blackbird, Stellar’s jay, Western meadowlark, White-crowned sparrow. We have also done a comparative analysis of diverse network structures and hyperparameters to identify the most suitable and efficient model for these kind of classification tasks.
 
 The limitations are discussed in detail for each classification task. Automatic species classification of birds from their sounds has many potential applications in conservation, ecology and archival [2]. The findings of this study can not only help in understanding their unique behavior but also serve as a tool for monitoring bird population and maintaining diversity. 
+
+[Back to top](#table-of-contents)
+
+---
 
 ## Theoretical Background
 Neural networks gained popularity in the late 1980s but they didn’t dominate due to their complexity and also the emergence of simpler methods like SVMs. Few years later, with high computational ability and the availability of huge training datasets eventually led to the rise of neural networks under the new name "deep learning."[3]
@@ -72,6 +93,10 @@ For example, max pooling looks at each 2 × 2 block and picks the highest value 
 
 CNNs have a great ability to learn features automatically, eliminating the need for manual feature extraction. This makes them highly adaptable to a wide range of tasks, from simple image recognition to more complex tasks like object detection and segmentation. Additionally, CNNs can be trained on large datasets, enabling them to learn highly accurate representations of complex visual patterns. 
 
+[Back to top](#table-of-contents)
+
+---
+
 ## Methodology
 This research aimed to classify bird data into multiple species using an already preprocessed version of Xeno-Canto’s Birdcall competition dataset.[1] This dataset contained raw audio recordings of bird sounds from 12 distinct species. The recordings were in MP3 format, with varying sampling rates and lengths. The methodology used for pre//processing the sound clips to extract bird calls of a specific species involved several steps. Firstly, the sound clip was subsampled to half its original sample rate, resulting in a new sample rate of 22050 Hz. This step is performed to reduce the computational complexity of subsequent processing steps. Secondly, the "loud" parts of the sound clip are identified, specifically those that are greater than 0.5 seconds in duration. From these identified sections, two second windows of sound are selected where a bird call is detected. These windows are then used to extract the relevant bird call data. To further analyze the bird calls, a spectrogram is produced for each 2-second window. The spectrogram provides a visual representation of the sound in terms of its frequency and intensity over time, resulting in a 343 (time) x 256 (frequency) "image" of the bird call. The spectrograms were labeled with the respective bird species names and saved in an HDF5 file, allowing efficient data access and organization for training and testing purposes.
 
@@ -88,6 +113,10 @@ The final layer of the model, called the output layer, is responsible for making
 To train the model, an optimization algorithm called Adam was employed. It adjusts the model's internal parameters to minimize the error between predicted and actual values. The categorical cross-entropy loss function was chosen to measure the dissimilarity between the predicted class probabilities and the true class labels. The model's performance was evaluated using the accuracy metric, which indicates how well the model correctly predicts the class of the input images. We have also used early stopping to avoid over learning in the model. 
 
 For external testing, we preprocessed three MP3 files using the same methodology that was used for the input data. This allowed for uniformity in input data that the model was trained on. A total of 183 spectrograms were obtained from the test MP3 files. Each file was separately fed to the multi-class CNN classification model to make predictions. The spectrograms were also padded to have the same frequency and time dimensions as the training data. 
+
+[Back to top](#table-of-contents)
+
+---
 
 ## Computational Results
 
@@ -233,6 +262,9 @@ The results show that audio files might have more than one species’s vocalizat
 
 Figure Dominant species based on aggregated probabilities for each audio file
 
+[Back to top](#table-of-contents)
+
+---
 
 ## Discussion
 Overall, we explored various neural network architectures with varying functions and parameters. We saw models overfitting and underfitting under different parameters. CNNs have shown a stable performance across both classification problems. We have explored techniques like Batch Normalization and dropout regularization to make the learning process more efficient and reliable. When we notice class imbalance in the dataset, we use class weights to help the model generalize well. This showed significant difference in the model’s performance and that’s evident through the three confusion matrices shown in the computational results. As shown in the results table, especially for binary classification, we can see signs of overfitting where the model wasn’t learning well and achieving high test accuracy even though the training accuracy was low. 
@@ -243,13 +275,24 @@ The species that proved most challenging to predict were the House Finch, Mallar
 
 Other models like decision trees, support vector machines, and random forests can be used too. However, a neural network is more suitable for this kind of application because it learns complex data patterns very well compared to traditional models. Neural networks also have the advantage of being able to generalize well to unseen data, making them suitable for classification tasks such as this one.
 
+[Back to top](#table-of-contents)
+
+---
+
 ## Conclusion
 In conclusion, the study focused on two different classification tasks: Binary Classification, Multi-Class Classification. The main goal was to classify different bird species based on their vocalizations. The study used various deep learning models such as CNN, Sequential CNN with different architectures and parameters along with dropout regularization and batch normalization techniques to combat overfitting. We evaluated their performance based on accuracy and loss metrics. We achieved commendable performance on both binary as well as multi-class classification tasks with such a limited dataset that had a potential class imbalance. 
 
 This research contributed to the understanding of classifying bird species based on audio recordings. Despite the challenges faced, the findings provide insights for future enhancements and optimizations in the field of bird species classification using neural networks. With further improvements and expanded datasets, it is possible to achieve more accurate and reliable classification results, thereby contributing to research and conservation efforts.
 
+[Back to top](#table-of-contents)
+
+---
+
 ## References
 [1] Rao, R. (n.d.). Xeno-canto bird recordings extended [Data set]. Kaggle. Retrieved from https://www.kaggle.com/datasets/rohanrao/xeno-canto-bird-recordings-extended-a-m
+
 [2] Laiolo, P. (2010). The emerging significance of bioacoustics in animal species conservation. Biological Conservation, 143(7), 1635-1645. https://doi.org/10.1016/j.biocon.2010.03.025.
+
 [3] James, G., Witten, D., Hastie, T., Tibshirani, R., & Taylor, J. (2023). An Introduction to Statistical Learning with Applications in Python. (Original work published 2023) https://hastie.su.domains/ISLP/ISLP_website.pdf.download.html
+
 [4] Bastian, M. (2019, October 11). Neural Network: The Dead Neuron. Towards Data Science. https://towardsdatascience.com/neural-network-the-dead-neuron-eaa92e575748
