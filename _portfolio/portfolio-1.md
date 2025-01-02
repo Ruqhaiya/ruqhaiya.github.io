@@ -4,7 +4,7 @@ excerpt: "The aim of this study is to predict whether a dwelling is occupied by 
 collection: portfolio
 ---
 
-- [Github Code Repository](https://github.com/Ruqhaiya/Blood-Bank-Management-System)
+- [Github Code Repository](https://github.com/Ruqhaiya/Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State)
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
