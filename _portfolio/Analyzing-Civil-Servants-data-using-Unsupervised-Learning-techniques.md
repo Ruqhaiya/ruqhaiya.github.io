@@ -4,7 +4,7 @@ excerpt: "This report leverages unsupervised learning techniques, specifically P
 collection: portfolio
 ---
 
-- [Github Code Repository]()
+- [Github Code Repository](https://github.com/Ruqhaiya/Analyzing-Civil-Servants-data-using-Unsupervised-Learning-techniques)
 
 ## Table of Contents
 - [Table of Contents](#table-of-contents)
