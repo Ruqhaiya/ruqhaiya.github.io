@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analyzing Civil Servants data using Unsupervised Learning techniques</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="mongolian civil_files/libs/clipboard/clipboard.min.js"></script>
+<script src="mongolian civil_files/libs/quarto-html/quarto.js"></script>
+<script src="mongolian civil_files/libs/quarto-html/popper.min.js"></script>
+<script src="mongolian civil_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="mongolian civil_files/libs/quarto-html/anchor.min.js"></script>
+<link href="mongolian civil_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="mongolian civil_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="mongolian civil_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="mongolian civil_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="mongolian civil_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analyzing Civil Servants data using Unsupervised Learning techniques</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<ul>
+<li><a href="">Github Code Repository</a></li>
+</ul>
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#theoretical-background">Theoretical Background</a></li>
+<li><a href="#methodology">Methodology</a></li>
+<li><a href="#computational-results">Computational Results</a></li>
+<li><a href="#discussion">Discussion</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<hr>
+</section>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>This report leverages unsupervised learning techniques, specifically Principal Component Analysis (PCA) and k-means clustering algorithms, to explore the annual declarations of personal interest and investment data from Mongolian civil servants[1]. The dataset, originally scraped from a dynamic web platform and collected for investigative journalism training by the Mongolian Data Club, contains comprehensive information from 2016 to 2021. For this analysis, data from the year 2021 was utilized. PCA was employed to reduce the dimensionality of the dataset, capturing approximately 81.64% of the total variance with the first 16 components. Subsequently, k-means clustering was applied to the principal components, identifying distinct clusters within the data. This approach aimed to uncover underlying trends and group similar declarations, a quantification task that has not previously been attempted on this dataset.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Mongolia, situated in East Asia, is a nation characterized by its rich natural resources and expansive land. The economy is predominantly natural resource-based, with coal and copper being the major exports. The country’s reliance on these resources makes its economy particularly vulnerable to fluctuations in global commodity prices[2]. Additionally, the heavy dependence on natural resources has led to significant challenges in governance, with the public sector, especially government agencies, being prone to corruption.</p>
+<p>To address these issues and foster greater transparency, a comprehensive reform has been initiated by the Mongolian government, creating an Independent Authority Against Corruption[3]. This reform requires civil servants, starting from senior levels and elected representatives, to annually declare their personal interests and investments[1]. The goal is to increase accountability and build public trust in governmental institutions. These declarations are intended to provide a clearer picture of potential conflicts of interest and ensure that officials are acting in the best interest of the public.</p>
+<p>The dataset for this initiative was carefully prepared from a publicly available source, originally scraped from a dynamic web platform that publishes civil servants’ personal interest and investment declarations. This data, initially collected for use in the Mongolian Data Club’s[4] investigative journalism training, contains thirty-seven features per individual report. These features include the reporter’s last name, full first name, income, family and household income, and detailed information about real estate holdings, such as the number of apartments, houses, or land owned. It also covers other assets like the number of cars and their values. A unique aspect of this declaration is that it is self-reported; however, if any false information is provided, the individual can be held legally accountable.</p>
+<p>In this report, unsupervised learning techniques, specifically Principal Component Analysis (PCA) and the k-means clustering algorithm, are utilized to analyze the data collected from these declarations. PCA is used to reduce the dimensionality of the data, making it easier to visualize and interpret, while k-means clustering aids in identifying patterns and grouping similar declarations together. Through these analyses, underlying trends in the data are aimed to be uncovered. This quantifying job has never been attempted on this dataset.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="theoretical-background" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-background">Theoretical Background</h2>
+<p>Unsupervised learning involves various statistical techniques used when we only have a set of features, such as X1, X2,…,Xp, measured across n observations. Unlike in supervised learning, we don’t have an outcome variable to predict. Instead, our goal is to explore and understand the data itself. We aim to find interesting patterns in the data, visualize the data, and identify any subgroups or clusters among the observations. With unsupervised learning techniques, we can uncover hidden structures and gain deeper insights from the data even without a specific predefined outcome. Two particular types of unsupervised learning are principal components analysis, a tool used for data visualization or data pre-processing before supervised techniques are applied, and clustering, a broad class of methods for discovering unknown subgroups in data. Principal components analysis Principal components analysis (PCA) is used to compute principal components and utilize them to understand the data better. PCA deals with a set of features, X1, X2,…,Xp, with no associated response variable, Y. Apart from producing derived variables for use in supervised learning problems, PCA also serves as a tool for data visualization (visualization of the observations or visualization of the variables). It is also used as a tool for data imputation — that is, for filling in missing values in a data matrix. Suppose we have a dataset with n observations and a set of features (like X1, X2,…,Xp) and we want to visualize these observations to perform an exploratory data analysis on the entire dataset. We can do this by creating scatterplots for each pair of features. However, with a large number of features, this quickly becomes overwhelming and impractical. For example, if we have 10 features, we would need to create 45 different scatterplots! In general, the number of scatterplots required is given by p(p−1)/2, where p is the number of features. Clearly, a better method is required to visualize the n observations when p is large, especially when we aim to retain as much information as possible. This is where PCA comes into play. PCA helps us find a lower-dimensional representation of the data that captures the most important variations. The goal of PCA is to summarize the data into a few key dimensions. These dimensions, called principal components, are new features created from the original ones. The first principal component captures the direction of the greatest variance in the data. In simple terms, it’s the line along which the data varies the most. To compute these principal components, PCA looks for a linear combination of the original features. The first principal component, Z1, is found by combining the features in such a way that it explains the maximum variance. The coefficients used in this combination are called loadings, and they are normalized to ensure the combination is meaningful. Z1 = ϕ11X1 + ϕ21X2 +⋯+ ϕp1Xp Given a dataset, we can find the first principal component by ensuring the features have a mean of zero and then calculating the combination of features that capture the most variation. This process is repeated to find subsequent principal components, each capturing the next highest variance while being orthogonal (independent) to the previous ones. zi1=ϕ11xi1+ϕ21xi2+⋯+ϕp1xip (first PCA) zi2=ϕ12xi2+ϕ22xi2+⋯+ϕp2xip (second PCA) Once we have computed the principal components, we can plot them against each other in order to produce low-dimensional views of the data. For instance, we can plot the score vector Z1 against Z2, Z1 against Z3, Z2 against Z3, and so forth. Geometrically, this amounts to projecting the original data down onto the subspace spanned by φ1, φ2, and φ3, and plotting the projected points. Proportion of Variance Explained (PVE) is a measure used in Principal Components Analysis (PCA) to quantify how much of the total variability in the data is captured by each principal component. The PVE by each principal component indicates the fraction of the total variance in the data that is explained by that component. This is calculated by dividing the variance explained by a principal component by the total variance. The sum of squared deviations from the mean (TSS) represents the total variance, and the residual sum of squares (RSS) represents the variance not explained by the selected principal components. The PVE can be computed as 1-RSS/TSS , and it is analogous to the R-squared value in regression analysis. By examining the PVE, one can determine the number of principal components needed to adequately capture the structure of the data, thus simplifying the analysis while retaining most of the original information. Singular Value Decomposition SVD stands for Singular Value Decomposition, which is a mathematical technique used for matrix factorization. It decomposes a matrix into three separate matrices, allowing valuable information about the matrix’s structure and properties. Given an m x n matrix A, the Singular Value Decomposition factorizes it into three matrices: A = U Σ V^T where: U is an m x m orthogonal matrix, whose columns are called the left singular vectors of A. Σ is an m x n diagonal matrix, with diagonal entries known as the singular values of A. The diagonal elements are arranged in descending order. V^T is the transpose of an n x n orthogonal matrix V, whose columns are called the right singular vectors of A. PCA is equivalent to SVD when the data is pre-scaled in the SVD decomposition. Hence, SVD can be used to reduce the dimensionality of a dataset by selecting the top k singular values and their corresponding singular vectors. This technique is especially useful for large datasets and can help with noise reduction and extracting the most informative features. SVD can reveal the most common directions or qualities the data have. Clustering Clustering is used to find subgroups or clusters within a dataset. The primary goal of clustering is to partition the observations into distinct groups such that the observations within each group are similar to each other, while observations in different groups are quite different. The definition of “similar” and “different” can vary depending on the domain and the specific characteristics of the data. There are many clustering methods available, but two of the most well-known are K-means clustering and hierarchical clustering. K-means clustering partitions the observations into a predefined number of clusters, while hierarchical clustering does not require specifying the number of clusters in advance. Instead, it produces a tree-like visual representation called a dendrogram, which shows the clusterings for all possible numbers of clusters, from 1 to n.&nbsp;Each method has its advantages and disadvantages, and the choice between them depends on the specific requirements and characteristics of the dataset. Let’s imagine we have a dataset with n observations, each having p features. What K-means does is try to minimize the differences within each cluster. It does this by solving an optimization problem that aims to reduce the total within-cluster variation, making sure the points in each cluster are as close to each other as possible. The algorithm works iteratively, first it randomly assigns each observation to one of the K clusters. Then, it calculates the centroid of each cluster, which is like finding the average position of all the points in that cluster. Next, it reassigns each observation to the cluster with the nearest centroid. This process keeps repeating until the cluster assignments stop changing. At each step, the within-cluster variation decreases, meaning the clusters become more distinct and well-defined. Visualizing the results of K-means clustering can help understand its effectiveness. For example, as shown in Figure 1, the results of applying K-means to a simulated dataset with 150 observations in two dimensions for different values of K can be seen. Each observation is colored based on its cluster assignment, showing how the algorithm divides the data into distinct groups.</p>
+<p>Figure 1 One of the challenges with K-means clustering is deciding the number of clusters. Also, since the algorithm finds a local optimum rather than a global optimum, the final clustering can depend on the initial random assignment of clusters. This is why it’s important to run the algorithm multiple times with different starting points and choose the best result based on the lowest within-cluster variation.</p>
+<p>Figure 2 Figures 2 and 3 illustrate the progression and variability of the K-means algorithm. Figure 2 shows how the cluster centroids and assignments evolve over iterations, and Figure3 shows the results of running K-means six times with different initial assignments, emphasizing the need to choose the best solution.</p>
+<p>Figure 3 Hierarchical clustering is a method used to group observations into clusters, and it has the advantage of not requiring us to pre-specify the number of clusters. This technique creates a tree-based representation called a dendrogram, which visually displays how observations are grouped at various levels of similarity. The most common hierarchical clustering method is bottom-up or agglomerative clustering. This method starts by treating each observation as its own cluster. Then, it repeatedly merges the two most similar clusters until all the observations are merged into a single cluster. The resulting dendrogram, which looks like an upside-down tree, shows the hierarchy of clusters formed at each step.</p>
+<p>Figure 4 For instance, Figure 4 shows a dataset with 45 observations plotted in two-dimensional space. Even though the true class labels are known, we ignore them and use hierarchical clustering to find natural groupings. The resulting dendrogram shows how the observations are grouped based on their similarities as seen in figure 5. To identify distinct clusters, we can make horizontal cuts across the dendrogram, cutting the dendrogram at a height of nine results in two clusters, while a cut at a height of five results in three clusters. This flexibility allows us to choose the number of clusters based on the structure of the dendrogram.</p>
+<p>Figure 5 The algorithm for hierarchical clustering is quite straightforward. It starts with each observation as its own cluster, it calculates the pairwise dissimilarities using Euclidean distance nd merges the two most similar clusters in each step. This process continues until all observations are combined into a single cluster. The method we choose to link clusters together plays a big role in how the dendrogram looks. Some common linkage methods are complete, average, single, and centroid linkage. Each of these methods has its own pros and cons, and the choice can affect how balanced and easy to interpret the dendrogram is.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="methodology" class="level2">
+<h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="computational-results" class="level2">
+<h2 class="anchored" data-anchor-id="computational-results">Computational Results</h2>
+<p>Data preprocessing</p>
+<p>The original dataset was scraped directly from the source site using a Selenium web driver[4] in a headless configuration. To avoid triggering DDoS protection and affecting the regular operation of the host server, the scraping was done from multiple virtual machines with random sleeping intervals, mimicking ten active users searching the declaration web. All column names were named after equivalent English names. The numerical data was self-explanatory and made sense; the only thing to be discussed was the unit, for example, how many millions or billions in Mongolian currency. To enable use for the project, job titles were translated into English using OpenAI’s GPT-4o model via API calls. The API [5] implementation followed the developer’s guidebook in Python. Dozen test API calls were made to set up the translation workflow. For example, in the preparation, the most approved words were asked and corrected as needed. The query was made on every row, one by one, using Python’s mapping function. Additionally, for future projects, a feature column will be created to note the category of the positions. The dataset used in this analysis was carefully prepared from a publicly available source, originally scraped from a dynamic web platform that publishes civil servants’ personal interests and investment declarations. This data was initially collected for use in the Mongolian Data Club’s investigative journalism training. The original dataset contained declarations from 2016 to 2021, but for this analysis, only data from 2021 was used. To begin, the position names in the dataset, originally in Mongolian, were translated into English using OpenAI’s API. In addition to the translation, potential categories were labeled for the translated job positions for reference purposes, although these categories were not utilized in the subsequent analysis. Similarly, the names of the institutions were translated into English using both OpenAI and the ChatGPT-4.0 model. A notable challenge arose with duplicates following the translations. Some unique Mongolian inputs resulted in similar English translations. To preserve the integrity of the original dataset and prevent the loss of potentially significant information, no columns were removed despite the presence of these duplicates. This approach ensured that the data retained the nuances and specificities of the original entries, staying true to the dataset’s original form. The final step in the data preparation involved removing NaN values, scaling the columns, and imputing missing values by the mean.</p>
+<p>Principal Component Analysis and K-Means Clustering</p>
+<p>Principal Component Analysis was used to reduce the dimensionality of the dataset, and k-means clustering algorithms were used to identify any pattern from the dimension reduced dataset.</p>
+<p>The initial step involved running PCA to determine how many components were necessary to explain the variance in the data. This was achieved by performing PCA on the scaled dataset and visualizing the explained variance. Subsequently, a PCA biplot was created to visualize the principal component loading vectors. This biplot illustrated how each original variable contributed to the first two principal components, aiding in understanding the relationships between the variables and the principal components. Following PCA, K-Means Clustering was applied to the principal components to identify clusters within the data. The final step involved performing K-Means clustering with the determined number of clusters. The clusters were then visualized in the first two principal components, providing a clear representation of how the different declarations were grouped based on their features.</p>
+<p>Figure 6 The sharp initial drop followed by a gradual decline shows that the first few principal components capture most of the important variations in the data. This means we can reduce the data to fewer dimensions without losing much information. It means that by focusing on the first two to five components, we can simplify the dataset while keeping its main structure intact. We plot the data further using PCA to see how much variance is explained by the first two components and the number of components.</p>
+<p>Figure 7,8 Figure 6 shows how much of the data’s variability is captured by each principal component. The first principal component explains the most variance around 12%, and each subsequent component explains progressively less. Figure 7 shows the cumulative amount of variance explained as 20 principal components are included. As we move to the right, we see how adding more components captures more of the total variance. It helps identify the point where adding more components does not significantly increase the explained variance.</p>
+<p>Figure 8 The plot on the left shows how much variance each principal component explains individually and the plot on the right shows the cumulative variance explained as more principal components are included.</p>
+<p>Figure 9 The PCA biplot visualizes both the observations and the variables in the first two principal component spaces. The arrows represent the original variables and it shows their direction and contribution to the principal components.</p>
+<p>Figure 10 This scatter plot shows the results of clustering the data into three clusters using the first two principal components from PCA. Each point represents an observation, colored by its assigned cluster. This helps us visualize how the data is grouped and the separation between clusters.</p>
+<p>Figure 11</p>
+<p>Figure 12</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<p>Scree Plot</p>
+<p>The scree plot displayed a sharp decline after the first principal component and then a more gradual decline. This “elbow” indicates that the majority of the variance is captured by the first few components. Specifically, the elbow suggests that the first 3-4 principal components account for a significant portion of the total variance. What does it means about the decomposition? It suggests that the dimensionality of our data can be reduced significantly without a substantial loss of information. By retaining only the first few principal components, we can capture the most critical aspects of the data.</p>
+<p>Interpretation of U and V* matrix from the SVD (or “x” and “rotation” from PCA) The U matrix shows how the original data points are represented in terms of the principal components. For example, we have data on various building counts and values, the U matrix shows how these data points cluster in the new space defined by the principal components. The V* matrix provides insights into how each original feature (such as different types of building or vehicle count) contributes to the principal components. Plotting first two principal components vs plotting on two original features From the PCA biplot in figure 9, we can see that COUNT_HOUSE_BUILDING and TOTAL_CONSTRUCTION_VALUE were significant contributors to the first two principal components. So we used these two features for our comparison. We plotted the data using these original features and first two principal components.</p>
+<p>In the plot using the original features, there is some indication of clustering, particularly with a concentration of points at lower values of COUNT_HOUSE_BUILDING and TOTAL_CONSTRUCTION_VALUE. However, the structure is not very clear due to the spread and potential noise in the data. In the PCA plot, there is a more distinct cluster of points near the origin, with some points spread out, indicating variability and the presence of outliers. This plot reveals a clearer structure, highlighting clusters and patterns that are less visible in the original feature plot. PCA reduces the dimensionality by capturing the most significant variance, making patterns and clusters more apparent. In contrast, the original feature plot includes all variance, including noise, which can potentially obscure the structure. PCA also filters out less important details, focusing on the primary sources of variability. This leads to a clearer visualization of the inherent structure. The principal components are linear combinations of the original features, providing a new perspective that highlights the underlying structure more effectively. After clustering, what observations belong to the same cluster?</p>
+<p>Data assigned to cluster 9 We analyzed data from cluster 1 and cluster 9. While cluster 1 had rows where ‘count’ variables such as Count_Apartment_Building and Count_House_Building were mostly 0s, Cluster 9 showed a pattern. As shown in the above table, data that belonged to cluster 9 shows some similarity if we look at the loan_total_value, savings_total and Construction_total_value. The have data points that are either close to one another or the same. Same can be seen with the ‘count’ variables, people who have a similar number of office buildings or house buildings were grouped together.</p>
+<p>One of the constraints encountered during hierarchical clustering was the Jupyter Notebook kernel crashing while running Python’s linkage library. The primary reason for the kernel crash was the large dataset size, which exceeded the computational capabilities of the environment.</p>
+<p>To address this issue, one potential method could have been to reduce the dataset size by sampling. Sampling would involve selecting a representative subset of the data, which would decrease the computational load and make the linkage process more manageable. However, for this report, this approach has not been implemented.</p>
+<p>Despite this limitation, the alternative clustering methods employed, such as k-means clustering, provided valuable insights into the data structure. Future analyses could consider implementing sampling or other dimensionality reduction techniques to enable successful hierarchical clustering with large datasets.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The application of unsupervised learning techniques to the Mongolian civil servants’ declaration data has provided valuable insights into the dataset’s structure. Principal Component Analysis (PCA) effectively reduced the dimensionality, preserving 81.64% of the total variance in just 16 components. K-means clustering further revealed three distinct groups within the data, highlighting patterns and potential areas of interest. These findings underscore the effectiveness of PCA and k-means clustering in handling and deriving meaningful insights from complex, multi-dimensional data. </p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[1] Xacxom IAAC. (n.d.). Home. Xacxom IAAC. http://xacxom.iaac.mn/ (Retrieved 2024, May 26, from http://xacxom.iaac.mn/)</p>
+<p>[2] Central Intelligence Agency. (n.d.). Mongolia. The World Factbook. https://www.cia.gov/the-world-factbook/countries/mongolia/ (Retrieved 2024, May 26, from https://www.cia.gov/the-world-factbook/countries/mongolia/)</p>
+<p>[3] Independent Authority Against Corruption of Mongolia. (n.d.). Home. Independent Authority Against Corruption of Mongolia. https://iaac.mn/ (Retrieved 2024, May 26, from https://iaac.mn/)</p>
+<p>[4] Selenium. (n.d.). Selenium with Python. Selenium Documentation. https://selenium-python.readthedocs.io/ (Retrieved 2024, June 2, from https://selenium-python.readthedocs.io/)</p>
+<p>[5] OpenAI. (n.d.). Overview. OpenAI Platform. https://platform.openai.com/docs/overview (Retrieved 2024, June 2, from https://platform.openai.com/docs/overview)</p>
+<p>[6] Mongolian Data Club. (n.d.). Home. Medium. https://dataclub.medium.com/ (Retrieved 2024, May 26, from https://dataclub.medium.com/)</p>
+<p>[7] James, G., Witten, D., Hastie, T., Tibshirani, R., &amp; Taylor, J. (2023). An Introduction to Statistical Learning with Applications in Python. (Original work published 2023) https://hastie.su.domains/ISLP/ISLP_website.pdf.download.html</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
