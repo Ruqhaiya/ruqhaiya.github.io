@@ -6,10 +6,73 @@ redirect_from:
   - /about/
   - /about.html
 ---
-I’m Ruqhaiya Fatima Syeda, a passionate Data Scientist and former Data Engineer with a vision to make data-driven decision-making the heart of every business. With over two years of experience in building robust data pipelines, processing large datasets, and developing predictive models, I specialize in translating complex data into actionable insights.
 
-Currently pursuing my Master’s in Data Science at Seattle University, I’m also a Graduate Research Assistant, working on a fascinating neuroscience project analyzing barn owls' auditory systems. My journey so far has been driven by curiosity and a love for storytelling through data.
+# Hi, I'm Ruqhaiya F. Syeda 👋
 
-Some of the technologies I’m proficient in include Python, SQL, Java, R, AWS, Azure, Snowflake, and MongoDB. From building scalable data solutions for leading auto insurance firms to developing machine learning models that predict human behavior, my expertise spans across industries and domains.
+👩‍💻 **Data Engineer** | 📊 **Data Scientist** | 🧠 **Neuroscience Enthusiast**
 
-I believe in the power of collaboration and continuous learning, and I’m always eager to explore new challenges that push the boundaries of data science and engineering.
+I’m passionate about storytelling through data and making it the center of decision-making. With 2 years of experience as a Data Engineer and a strong background in Data Science, I have honed skills in data engineering, machine learning, and neuroscience research. Currently, I’m pursuing a Master’s in Data Science and working as a Graduate Research Assistant on projects that combine my love for technology and curiosity about the brain.
+
+---
+
+## 🛠️ Skills & Tools
+
+### 💻 Programming & Scripting:
+- Python, SQL, R, Java
+- Object-Oriented Programming (OOP), Bash scripting
+
+### 🏗️ Data Engineering:
+- ELT/ETL Pipelines
+- Data Cleaning, Processing, and Transformation
+- Data Modeling & Warehousing (Snowflake, MySQL, PostgreSQL)
+- Unit Testing & Automation (DBT, Agile, Scrum)
+
+### 🔍 Machine Learning & Data Science:
+- Predictive & Statistical Modeling
+- Neural Networks, Decision Trees, and Ensemble Models
+- Regression Techniques, Dimensionality Reduction (SVD)
+- Numpy, Pandas, Scikit-learn, R-Shiny, PySpark
+- Statistical Machine Learning, Data Analytics
+
+### ☁️ Cloud & Platforms:
+- AWS (S3, Lambda, EC2)
+- Microsoft Azure (DevOps, Power Apps, Function Apps)
+- ArcGIS Pro, Jira
+
+### 📦 Databases:
+- Relational: MySQL, PostgreSQL
+- NoSQL: MongoDB
+
+### 📊 Data Visualization & BI Tools:
+- Tableau, Power BI, R-Shiny, Excel
+- Matplotlib, Seaborn, Tkinter GUI
+
+---
+
+## 🎓 Academic Projects
+1. [Bird Call Identification using Neural Networks](https://github.com/Ruqhaiya/Bird-call-Identification-using-Neural-Networks)
+2. [Analyzing Youth Substance Use Based on Family, Religious, and Education Background](https://github.com/Ruqhaiya/Analyzing-Youth-Substance-Use-Based-on-Family-Religious-and-Education-background)
+3. [Analyzing and Predicting Dwelling Occupancy in Washington State](https://github.com/Ruqhaiya/Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State)
+4. [Analyzing Civil Servants Data using Unsupervised Learning Techniques](https://github.com/Ruqhaiya/Analyzing-Civil-Servants-data-using-Unsupervised-Learning-techniques)
+5. [Blood Bank Management System](https://github.com/Ruqhaiya/Blood-Bank-Management-System)
+6. [Predicting Electricity Load in New Hampshire](https://github.com/Ruqhaiya/Predicting-Electricity-Load-in-New-Hampshire)
+7. [DBMS Project Enhancements](https://github.com/Ruqhaiya/Dbms-Project-Enhancements)
+
+---
+
+## 📫 Connect with Me
+
+- LinkedIn: [Ruqhaiya Fatima Syeda](https://www.linkedin.com/in/ruqhaiya-f-703425174/)
+- GitHub: [Ruqhaiya](https://github.com/Ruqhaiya)
+
+---
+
+## 🎯 Open to Collaborations
+
+I'm open to collaborating on data-driven projects, especially those integrating data science and neuroscience. Let's work together to solve impactful problems and make data come alive!
+
+---
+
+⭐ **Feel free to explore my repositories and leave a star if you find something helpful!** ⭐
+
+Let me know if there’s anything more you’d like to add or adjust!
