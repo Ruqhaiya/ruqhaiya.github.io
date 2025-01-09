@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analyzing and Predicting Dwelling Occupancy in Washington State</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/quarto-html/quarto.js"></script>
+<script src="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/quarto-html/popper.min.js"></script>
+<script src="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analyzing and Predicting Dwelling Occupancy in Washington State</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<ul>
+<li><a href="https://github.com/Ruqhaiya/Analyzing-and-Predicting-Dwelling-Occupancy-in-Washington-State">Github Code Repository</a></li>
+</ul>
+<section id="table-of-contents" class="level2">
+<h2 class="anchored" data-anchor-id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#abstract">Abstract</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#theoretical-background">Theoretical Background</a></li>
+<li><a href="#methodology">Methodology</a></li>
+<li><a href="#computational-results">Computational Results</a></li>
+<li><a href="#discussion">Discussion</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<hr>
+</section>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>The aim of this study is to predict whether a dwelling is occupied by owners or renters based on several features related to individual demographics and housing characteristics. We have used Support Vector Machines (SVM) to classify the dataset. Our models achieved up to 82% accuracy in classifying dwellings. It was observed that factors such as Age and Number of bedrooms were significant predictors in determining whether a dwelling is owned or rented followed by other predictors like average house income and cost of utilities. Among the models we built, the linear kernel was recommended for its robustness and simplicity. The findings of this study provides a thorough analysis of the factors influencing dwelling occupancy and uncover deeper patterns which will be useful to real estate professionals in understanding housing trends.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Renters tend to skew toward the lower ends of the economic scale when it comes to income and wealth, according to data from the Federal Reserve’s 2019 Survey of Consumer Finances[1]. The primary goal of this study is to predict whether dwellings are occupied by owners or renters based on various demographic and housing-related factors. By using three different Support Vector Machines (SVM) kernels—linear, radial basis function (RBF), and polynomial, we not only seek to explore the predictive capabilities of these models but also gain insights into the underlying patterns within the data.</p>
+<p>The dataset is obtained from the US Census, accessed through IPUMS USA[2]. This dataset is comprehensive with a wide range of variables including individual demographic information such as age, income, education level, and marital status as well as housing characteristics like electricity cost, year of construction, and population density of the surrounding area. These variables offer a rich source of information for understanding how individual attributes relate to whether people own or rent their homes.</p>
+<p>Throughout this report, we will explore the dataset and pre-process it. Pre-processing the data plays an essential role in generating insights that we can trust. The goal is to understand the application of SVMs to classification tasks and analyze how different kernel functions influence model performance. We will examine the relationships between selected variables and housing occupancy.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="theoretical-background" class="level2">
+<h2 class="anchored" data-anchor-id="theoretical-background">Theoretical Background</h2>
+<p>Support Vector Machines(SVMS) are supervised learning methods used for classification and regression problems. SVM is a common term used to refer to the maximal margin classifier, support vector machine and the support vector machine. However, Support vector machine is a generalization of maximal margin classifier which requires data to be linearly separable. The support vector classifier is an extension of the maximal margin classifier which can be applied to a broader variety of datasets. The support vector machine is an extension of the support vector classifier and SVM can be used in cases where the data has a non-linear boundary.</p>
+<p>The support vector machine uses a hyperplane to separate the classes. A hyperplane in a p-dimensional space is a flat subspace of dimension p-1. In 2D, a hyperplane is a line and in 3D, it is a plane. When p&gt;3, it’s hard to visualize a hyperplane but the concept of p-1 dimensional subspace still applies. A hyperplane is in p-dimension is defined by the equation: β0 + β1X1 + β2X2 + · · · + βpXp = 0 eq(1)</p>
+<p>A point X= (X1,X2, . . . ,Xp)T in p-dimensional space lies on the hyperplane if it satisfies the eq(1). If eq(1) is greater than 0, X is on one side of the hyperplane, and if it is less than 0, X is on the other side. However, if data is perfectly linearly separable, there can be infinite hyperplanes as shown in figure 1 [3].</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/user-attachments/assets/4ba2984e-c497-4a6e-995b-be13a26e09db.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Figure 1 This is why choosing the hyperplane is crucial for the analysis, which is why we have the maximal margin classifier. It is the optimal hyperplane– separating two classes–that is farthest from the training data. The SVM uses the principle of maximizing the distance between nearest data points from the hyperplane from either class. The distance between the hyperplane and the point is called as margin as shown</p>
+<p>The SVM operates on the idea of increasing the space between the closest points of each group and the dividing line, which is the hyperplane. The gap between this line and the nearest point is what we call the margin, as demonstrated in figure (2) [3].</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/user-attachments/assets/11ec01b6-35bf-4d9a-b013-9768636fc298.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Figure 2</p>
+<p>The nearest data points to the hyperplane are called the support vectors. Larger distance between the margin makes the model better. The mechanism of finding the hyperplane is fully accomplished by a subset of the training samples and the support vectors. Therefore, the support vectors play an essential role in determining the position of the hyperplane, and removing other training data points does not have any effect on the model but removing support vectors could affect our model performance drastically. They help in determining the optimal hyperplane for the dataset.</p>
+<p>A classifier based on separating hyperplanes is good until an observation arrives which is far from the hyperplane, this shifts the hyperplane and results in a tiny margin. Then our confidence in the classification based on thin margin decreases. To tackle this, we have a Support vector classifier that is more robust to individual observations, although we make a trade-off here unlike in the Maximal Margin Classifier where we have a hard margin, here we allow few misclassifications and call it a soft-margin. We trade a small portion of our model’s performance to get better overall results. Rather than having the optimal maximal margin so that data are on the correct side of the hyperplane and margin, we instead allow some data to be on the incorrect side of the margin, or even the hyperplane as shown in Figure (3) [3].</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/user-attachments/assets/cfaff2db-3bf8-47f0-aa0a-5192e031431b.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Figure 3: observations 11 and 12 are on the wrong side of the hyperplane and the wrong side of the margin. This solution is defined as: ε_i ≥ 0, Σ_(i=1)^n ε_i ≤ C eq(2)</p>
+<p>Where C is a tuning parameter. We try to find the highest possible C for our model, which means we want to allow misclassifications while also wanting our model to perform well. If ε_i = 0 then the ith observation is on the correct side of the margin, If ε_i &gt; 0 then the ith observation is on the wrong side of the margin, meaning it has violated the margin. If ε_i &gt; 1 then it is on the wrong side of the hyperplane itself.</p>
+<p>C tuning parameter is often referred to as the budget, because we have a certain budget to allow misclassifications. The value of c controls the tradeoff between the model’s ability to fit the training data and its ability to generalize to new data. SVM’s kernel hyperparameter is crucial for model performance, with options including linear, polynomial, and radial kernels. Different kernels enlarge the feature space in a specific way. Tuning these hyperparameters can have a significant effect on model accuracy.</p>
+<p>Polynomial kernel is used when data is not linearly separable, so a polynomial function is used to separate the data. For instance, by increasing the feature space using quadratic, cubic, and even higher-order polynomial functions of the predictors.So instead of fitting a support vector classifier using p features X1,X2, . . . ,Xp, we instead fit a support vector classifier using 2p features X^1, X1^2, X^2, X2^2 , . . . ,Xp,Xp^2. The basic idea is to transform the input data into a higher-dimensional space where it can be linearly separated, and then build a linear model on top of it to separate the classes. The kernel function used in polynomial kernel SVM is defined as [3] where x and y are input feature vectors, c is a constant, and d is the degree of the polynomial. When d is 1, the polynomial kernel is just a linear kernel, and when d is higher, the kernel function puts the data into a higher-dimensional space. The degree parameter controls the complexity of the polynomial function used to separate the data. If the degree is too low, the model may not be able to separate the data effectively, and if the degree is too high, the model might be overfitting and perform poorly on new data. Tuning these hyperparameters is important for achieving good performance with polynomial kernel SVMs. The RBF kernel (Radial Basis Function), uses gamma to check if a new data point, let’s say x^<em>, is near or far from the points we know. If x^</em> is far away, the radial kernel, with the help of gamma, basically says this point doesn’t matter much for making predictions. This way, only the points that are really close to x^* influences what the prediction will be. RBF is defined as:</p>
+<p>Why do we not enlarge space using the original features? Using kernels is computationally lighter, because SVMs are computationally expensive and enlarging features could create infinite dimensions. When there are more than 2 classes, the two most popular methods to use are the one-versus-one and one-versus-all. One-versus-one creates a classifier for every possible pair of classes. If we have K classes, this means we will have K(K−1)/2 classifiers. Each classifier votes for an observation to belong to one of two classes. The class that gets the most votes across all classifiers is the final choice for where the observation fits.</p>
+<p>The one-versus-all method, also known as one-versus-rest, is another approach where we create one classifier per class, comparing each class against all the others combined. Each classifier gives a confidence score for its class, and the one with the highest score decides the class for the observation.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="methodology" class="level2">
+<h2 class="anchored" data-anchor-id="methodology">Methodology</h2>
+<p>The dataset provided a unique challenge as each row represented a dwelling with multiple occupants living in the same house. SERIAL provides a unique identification number for each household in a dwelling and we observed that there are multiple records for a single household. More than 50% of the dataset is redundant with only ~30k unique households. We have subsetted the data by grouping each household by SERIAL column and only keeping the row which has the highest age, meaning the oldest individual of the household. This is because it is highly likely that they might be the renter or the owner.</p>
+<p>Then we analyzed the dataset further and decided to remove these columns for the reasons mentioned below:</p>
+<p>● PERWT: This variable is used when we want to do individual person analysis and it is not directly related to predicting home ownership, so having it is not required for our study.</p>
+<p>● BRTHYR: BRTHYR corresponds to the date of birth of a person and it was deleted as we have the AGE variable, this column is repetitive.</p>
+<p>● PERNUM: This column corresponds to the number of people in a family. It is directly not relevant since we are taking the eldest member from each family. But we will encode it like 1 for PERNUM &gt; 1 and 0 for PERNUM ==1. This might be a good piece of information for our models.</p>
+<p>● AGE: We took the maximum age from the rows to align it with our assumption that older individuals in the household will be the owner or renter.</p>
+<p>● EDUCD : We deleted this column from the data set since it’s correlated with the EDUC, it’s repetitive.</p>
+<p>● INCTOT : We took the mean for this column as it gives us the average income of the household.</p>
+<p>● HHINCOME : We removed this as it’s highly correlated to average income INCTOT.</p>
+<p>After fitting the first model, it was noticed that the accuracy is 100% and it definitely means our model is overfitting. A decision tree classifier was used initially to analyze what’s causing this. We found that it was the VALUEH column that holds the value of each household, it was a perfect separator. It makes perfect sense that the prediction can be easily made with the help of this data. Hence, we removed this column from the dataset.</p>
+<p>Svm is not good with too many categories, so we converted the MARST to a binary variable, 0 if an individual is single and 1 otherwise. Then we addressed the data columns that included the cost of electricity, water, gas, and fuel. The predictors associated with these records had a particular code 9999, 9993, 9997 that indicated whether there was no cost or if these expenses were already included in the rent. It was crucial to replace these values with 0 to avoid model inaccuracy. After subsetting, although we had 30k rows but we used a sample of 10K rows because the SVM was taking a long time to compute, 10k is also a good size for a dataset.</p>
+<p>We used SVM for classification tasks to accurately identify the houses, using a variety of demographic and environmental parameters as predictors such as age, education level, family income, and cost of maintaining a property. We used cross-validation techniques to assess the performance of our model. Later, we expanded the model to include the RBF kernel and polynomial kernel with varying cost, gamma, and polynomial degree values.</p>
+<p>We found that even after training the model with several hyperparameters, the results were comparable to what we were achieving with the linear SVM model although using the radial kernel, we achieved a slightly higher accuracy of 82%. Choosing the linear model as the final model is a good decision because it requires less computational effort to achieve almost similar outcomes. In summary, our process includes recognizing and addressing outliers, considering how to aggregate the data based on the unique features, and then training the SVM model, tuning it to choose the best parameters and evaluating its performance on the test dataset.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="computational-results" class="level2">
+<h2 class="anchored" data-anchor-id="computational-results">Computational Results</h2>
+<p>To build the model to classify the dwelling as rented or owned, we have used various variables like income, marital status, education and the cost which is involved in the household such as cost of gas, electricity and fuel. We have achieved 82% accuracy in classifying the dwelling. We have used linear, RBF and polynomial kernels to train the machine learning model. We cross validated the model using cost, gamma, and degree hyperparameters. It was observed that the model was giving almost similar accuracy with the RBF and linear kernel. Hence, it’s advised to use the linear kernel since it is a robust model that requires comparatively less computation power. A linear SVM model is also less prone to overfitting.</p>
+<p>We used a decision boundary plot to visualize the model’s performance. Plot for the linear SVM model is shown in figure 4. The plot was constructed using Age and Bedrooms features from the dataset that were significant for the model. Only two features were used because it’s easier to depict how the SVM finds optimal boundaries between classes in a two-dimensional space.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/user-attachments/assets/da631f5b-1a5c-4eb7-8895-7f910179ef03.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Figure 4</p>
+<p>The SVM model’s decision boundary clearly shows a linear separation between homeowners and renters, achieving an accuracy of 81.2%. As age increases, depicted by higher values on the x-axis, the likelihood of owning a home also increases—this is visible as the blue region, representing homeowners, expands with age. Similarly, homes with more bedrooms are more likely to be owned, which is consistent with the expectation that larger families or more financially stable individuals tend to own their properties. These findings align with common observations that older individuals, who typically have greater financial stability, are more likely to own homes. The relationship between larger homes and homeownership also suggests that families needing more space are more inclined to buy rather than rent.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/user-attachments/assets/7fae411e-6c27-4fad-a088-cc373feb122f.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Figure 5</p>
+<p>The decision boundary surface for SVM with radial kernel is shown in figure 5. The non-linear boundary shows how the RBF kernel is able to capture complex patterns in the data. We can see how the orange region has made its way to the top left side of the plot, where age takes lower values and bedrooms take higher values. This conveys that younger adults who live in large dwellings are more likely to be classified as renters. Then as age and number of bedrooms increases, they’re more likely to be classified as an owner, the same as seen in linear SVM.</p>
+<p>Figure 6 shows the decision boundary for the SVM polynomial kernel. We can infer from the plot that it’s decent at capturing patterns in the data. As age and and house size increases to a ceratin value, the polynomial SVM model tends to classify it as a owner.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://github.com/user-attachments/assets/756ef515-9ebe-4c3b-b8da-750823871085.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>Figure 6 The models were working well on the test dataset. We got almost the same performance in terms of accuracy and error on the test set as we were getting on the training set. It conveys that the models were not overfitting although we can see that the RBF kernel boundary might be overfitting the data.</p>
+<p>Figure 6 shows the confusion matrix for the linear SVM, RBF and Polynomial SVM. Class 1 represents the owned category and class 2 represents the rented category. It is evident that the models were good at predicting when a dwelling is owned compared to class 2 but it is also a result of our dataset which is not perfectly balanced. We have more data for class 1 compared to class 2. The results are comparatively better since we have used stratified sampling to deal with the class imbalance.</p>
+<p><img src="https://github.com/user-attachments/assets/08eb168d-4004-4db0-b87d-fe06e1a3bf96.png" class="img-fluid" alt="image"> <img src="https://github.com/user-attachments/assets/a7d346d3-bb6d-46cf-8f6e-ce1229b4fb50.png" class="img-fluid" alt="image"> <img src="https://github.com/user-attachments/assets/6285b6d9-92e5-4d8b-8b98-079d91105ca9.png" class="img-fluid" alt="image"></p>
+<p>Figure 6 Confusion matrix for all three models: Linear, RBF, Polynomial SVM kernels</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<p>It is worth noting that the IPUMS USA dataset includes a vast array of data that can be used to answer many more questions related to the dwelling’s ownership. This study concentrated specifically on the people’s income, age, and education, which was just one component of the data. Regardless of this, our findings provide valuable insights into knowing which variables are important to determine if people will own the house or not.</p>
+<p>Apart from income and education, the study was based on several aspects such as the cost of maintaining the space such as electricity, fuel, and gas. Our findings show that predictors such as age, number of bedrooms, cost of utilities and average household income are strong predictors and have a considerable impact on a person’s likelihood of homeownership. The data could be further studied by answering questions based on parental education status and income and determining whether or not the person will buy their own home later in life. We also want to see how the results differ if we only look at the data for married couples as a further extension of this report.</p>
+<p>Some of the insights or conclusions we can draw from the models are: 1. Younger adults seem to fall under the renter’s category, which means dwellings are not affordable for young adults who might have less financial stability. 2. Older adults are more likely to be owners rather than renters. It was also observed that most of the dwellings that are bought are quite large which shows the preference of families. This could be helpful in real-estate planning. 3. It was also noticed that even though the houses are large but if they are occupied by young adults, they’re more likely to be classified as renters. Same goes for the older adults who live in smaller dwellings, they are more likely an owner regardless of the size of the dwelling. These insights show how our models were able to capture such deeper insights. On test results, the SVM model attained an accuracy of 81.2%, suggesting its usefulness in identifying the residence. Furthermore, adding the RBF or polynomial kernel had no significant effect on the model’s accuracy with RBF just doing 82%, slightly higher. However, the study had limitations such as the cross-sectional nature of the data, which limits the ability to infer causality, and self-reported data because the data was too correlated, resulting in data loss of nearly 50%. We didn’t have many distinct features to work with, such as bedrooms and rooms, which were significantly associated with each other. Other examples include the relationship between income and highest income, as well as education and education code. Furthermore, the sample size of the dataset was relatively small, which may limit the generalizability of findings to a larger population.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This study focused on using Support Vector Machine (SVM) models and their kernel extensions, like RBF and polynomial, to predict ownership of a dwelling. We used data sourced from IPUMS USA, originally collected by the US Census. The results were promising, with the models reaching an accuracy of 82% (radial kernel) for the binary classification task of predicting home purchases versus rentals. This suggests that SVMs can be effective for real estate predictions. Features such as age, number of bedrooms, cost of utilities and average household income were strong predictors. The strong performance of the models could be beneficial for real estate agents and policymakers in developing strategies that serve both companies and individuals. For instance, these insights could be used in understanding and planning what type of homes should be prioritized such as family-sized based on number of bedrooms. It could help in potentially stabilizing the housing market and making homes more accessible. Additionally, this analysis could also be used in choosing the right location for new housing projects and increasing the chances of having more homeowners, based on a detailed analysis of the preferences individuals tend to have while buying a dwelling. This study significantly adds to the growing knowledge about applying SVMs with various kernels to homeownership classification tasks and analysis.</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[1] Pew Research Center. (2022, March 23). Key facts about housing affordability in the U.S. Pew Research Center: Short Reads. https://www.pewresearch.org/short-reads/2022/03/23/key-facts-about-housing-affordability-in-the-u-s/</p>
+<p>[2] Steven Ruggles, Sarah Flood, Matthew Sobek, Danika Brockman, Grace Cooper, Stephanie Richards, and Megan Schouweiler. IPUMS USA: Version 13.0 [dataset]. Minneapolis, MN: IPUMS, 2023. https://doi.org/10.18128/D010.V13.0</p>
+<p>[3] James, G., Witten, D., Hastie, T., Tibshirani, R., &amp; Taylor, J. (2023). An Introduction to Statistical Learning with Applications in Python. (Original work published 2023) https://hastie.su.domains/ISLP/ISLP_website.pdf.download.html</p>
+<p><a href="#table-of-contents">Back to top</a></p>
+<hr>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
