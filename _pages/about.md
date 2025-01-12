@@ -1,19 +1,18 @@
 ---
 permalink: /
-#title: "About Me"
+title: "Hi, I'm Ruqhaiya F. Syeda 👋"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-# Hi, I'm Ruqhaiya F. Syeda 👋
-
 👩‍💻 **Data Engineer** | 📊 **Data Scientist** | 🧠 **Neuroscience Enthusiast**
 
 I’m passionate about storytelling through data and making it the center of decision-making. With 2 years of experience as a Data Engineer and a strong background in Data Science, I have honed skills in data engineering, machine learning, and neuroscience research. Currently, I’m pursuing a Master’s in Data Science and working as a Graduate Research Assistant on projects that combine my love for technology and curiosity about the brain.
 
-- [Github](https://github.com/Ruqhaiya)
+[Github](https://github.com/Ruqhaiya) 
+[LinkedIn](https://www.linkedin.com/in/ruqhaiya-f-s-703425174/)
 ---
 
 ## 🛠️ Skills & Tools
