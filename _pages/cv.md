@@ -11,8 +11,8 @@ redirect_from:
 
 Education
 ======
-* M.S., Data Science	| Seattle University (_Graduate June 2025_)	 			        		
-* B.E., Information Technology | Osmania University (_Graduated - 2021_)
+* M.S., Data Science, Seattle University (_Graduate June 2025_)	 			        		
+* B.E., Information Technology, Osmania University (_Graduated - 2021_)
 
 
 Work experience
