@@ -15,6 +15,12 @@ I’m passionate about storytelling through data and making it the center of dec
 
 ---
 
+## 📫 Connect with Me
+
+- LinkedIn: [Ruqhaiya Fatima Syeda](https://www.linkedin.com/in/ruqhaiya-f-703425174/)
+- GitHub: [Ruqhaiya](https://github.com/Ruqhaiya)
+
+---
 ## 🛠️ Skills & Tools
 
 ### 💻 Programming & Scripting:
@@ -57,13 +63,6 @@ I’m passionate about storytelling through data and making it the center of dec
 5. [Blood Bank Management System](https://github.com/Ruqhaiya/Blood-Bank-Management-System)
 6. [Predicting Electricity Load in New Hampshire](https://github.com/Ruqhaiya/Predicting-Electricity-Load-in-New-Hampshire)
 7. [DBMS Project Enhancements](https://github.com/Ruqhaiya/Dbms-Project-Enhancements)
-
----
-
-## 📫 Connect with Me
-
-- LinkedIn: [Ruqhaiya Fatima Syeda](https://www.linkedin.com/in/ruqhaiya-f-703425174/)
-- GitHub: [Ruqhaiya](https://github.com/Ruqhaiya)
 
 ---
 
