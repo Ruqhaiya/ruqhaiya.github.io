@@ -10,13 +10,12 @@ redirect_from:
 👩‍💻 **Data Engineer** | 📊 **Data Scientist** | 🧠 **Neuroscience Enthusiast**
 
 I’m passionate about storytelling through data and making it the center of decision-making. With 2 years of experience as a Data Engineer and a strong background in Data Science, I have honed skills in data engineering, machine learning, and neuroscience research. Currently, I’m pursuing a Master’s in Data Science and working as a Graduate Research Assistant on projects that combine my love for technology and curiosity about the brain.
-
 ---
-
 ## 📫 Connect with Me
 
-- LinkedIn: [Ruqhaiya Fatima Syeda](https://www.linkedin.com/in/ruqhaiya-f-703425174/)
-- GitHub: [Ruqhaiya](https://github.com/Ruqhaiya)
+- LinkedIn: [](https://www.linkedin.com/in/ruqhaiya-f-703425174/)
+- GitHub: [](https://github.com/Ruqhaiya)
+- Leetcode: [](https://leetcode.com/u/ruqhaiya92/)
 
 ---
 ## 🛠️ Skills & Tools
