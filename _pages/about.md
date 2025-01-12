@@ -16,7 +16,6 @@ I’m passionate about storytelling through data and making it the center of dec
 ## 📫 Connect with Me
 
 - [LinkedIn](https://www.linkedin.com/in/ruqhaiya-f-703425174/)
-- [GitHub](https://github.com/Ruqhaiya)
 - [Leetcode](https://leetcode.com/u/ruqhaiya92/)
 
 ---
