@@ -87,12 +87,12 @@ Skills
   * Statistical inference
   * Data visualization (2D/3D plotting, PCA biplots)
 
-
+<!-- 
 Publications
 ======
   <ul>{% for post in site.publications reversed %}
     {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+  {% endfor %}</ul> -->
 
 <!--   
 Talks
@@ -109,6 +109,6 @@ Teaching
     {% include archive-single-cv.html %}
   {% endfor %}</ul> -->
   
-Service and leadership
+<!-- Service and leadership
 ======
-* 
+*  -->

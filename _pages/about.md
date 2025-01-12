@@ -11,9 +11,8 @@ redirect_from:
 
 I’m passionate about storytelling through data and making it the center of decision-making. With 2 years of experience as a Data Engineer and a strong background in Data Science, I have honed skills in data engineering, machine learning, and neuroscience research. Currently, I’m pursuing a Master’s in Data Science and working as a Graduate Research Assistant on projects that combine my love for technology and curiosity about the brain.
 
-[Github](https://github.com/Ruqhaiya) 
+[Github](https://github.com/Ruqhaiya) | [LinkedIn](https://www.linkedin.com/in/ruqhaiya-f-s-703425174/)
 
-[LinkedIn](https://www.linkedin.com/in/ruqhaiya-f-s-703425174/)
 ---
 
 ## 🛠️ Skills & Tools
